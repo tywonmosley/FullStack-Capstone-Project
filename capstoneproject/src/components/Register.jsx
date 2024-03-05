@@ -11,14 +11,17 @@ function Register() {
     password: "",
     email: "",
   });
-  
+  const [ error, setError ] = useState(null)
   const [register] = useRegisterMutation();
 
 
   const eventHandler = async (event) => {
     event.preventDefault();
     const { data,error } = await register(userInfo)
+    //data.token --> has token value
+    //data.data.message --> data message
     console.log(`data${JSON.stringify(data)}`);
+    //error.data.message --> error message
     console.log(`error${JSON.stringify(error)}`);
 
   };
@@ -32,6 +35,8 @@ function Register() {
   return (
     <div>
       <h1>Register</h1>
+      {/* error message */}
+      {error ? <p>{error}</p> : false}
       <form className="register" onSubmit={eventHandler}>
         <label>
           First Name:
