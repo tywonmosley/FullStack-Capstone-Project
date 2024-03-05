@@ -3,7 +3,7 @@ import { useState } from "react";
 //api
 import { useRegisterMutation } from "../redux/api";
 
-function Register() {
+function Register(props) {
   const [userInfo, setUserInfo] = useState({
     firstname: "",
     lastname: "",
@@ -11,24 +11,29 @@ function Register() {
     password: "",
     email: "",
   });
-  
+  const [error, setError] = useState(null);
   const [register] = useRegisterMutation();
-
+  
 
   const eventHandler = async (event) => {
     event.preventDefault();
-    const { data,error } = await register(userInfo)
-    console.log(`data${JSON.stringify(data)}`);
-    console.log(`error${JSON.stringify(error)}`);
-
+    const { data, error } = await register(userInfo);
+     if (error) {
+      setError(error.data.message);
+      console.log(`error ${JSON.stringify(error.data.message)}`);
+    } else {
+      props.setToken(data.token);
+      console.log(`data ${JSON.stringify(data.token)}`);
+    }
   };
 
   const onUserInput = (e) => {
-    console.log(e.target.name, e.target.value);
+    if (errorMsg) {
+      setError(null);
+    }
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
-  
-  
+
   return (
     <div>
       <h1>Register</h1>
@@ -93,8 +98,6 @@ function Register() {
       </form>
     </div>
   );
-
-  
 }
 
 export default Register;
