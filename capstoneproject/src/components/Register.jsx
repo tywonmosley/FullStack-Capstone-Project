@@ -11,15 +11,22 @@ function Register(props) {
     password: "",
     email: "",
   });
-  
-  const [register] = useRegisterMutation();
+  const [errorMsg, setError] = useState(null);
+   const [register] = useRegisterMutation();
   
 
   const eventHandler = async (event) => {
     event.preventDefault();
     const { data,error } = await register(userInfo)
-    console.log(`data${JSON.stringify(data)}`);
-    console.log(`error${JSON.stringify(error)}`);
+    if (error) {
+      //error.data.message --> error message
+      setError(error.data.message);
+      console.log(`error ${JSON.stringify(error.data.message)}`);
+    } else {
+      //data.token --> has token value
+      props.setToken(data.token);
+      console.log(`data ${JSON.stringify(data.token)}`);
+    }
 
   };
 
@@ -34,7 +41,7 @@ function Register(props) {
     <div>
       <h1>Register</h1>
       {/* error message */}
-      {error ? <p>{error}</p> : false}
+      {errorMsg ? <p>{errorMsg}</p> : <span />}
       <form className="register" onSubmit={eventHandler}>
         <label>
           First Name:

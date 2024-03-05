@@ -7,18 +7,23 @@ export const apiSlice = createApi({
   reducerPath: 'api',
   // All of our requests will have URLs starting with '/fakeApi'
   baseQuery: fetchBaseQuery({ baseUrl: '/https://fakestoreapi.com' }),
-  endpoints: builder => ({
-   
+  
+  endpoints: (builder) => ({
     register: builder.mutation({
-      query: (registerUser,) => ({
-        url: '/users/register',
+      query: (registerUser) => ({
+        url: "/auth/register",
         method: "POST",
         body: registerUser,
-    
+      }),
     }),
+    login: builder.mutation({
+      query: (loginUser) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: loginUser,
+      }),
     }),
   }),
 });
 
-// Export the auto-generated hook for the `getPosts` query endpoint
-export const { useRegisterMutation } = apiSlice;
+export const { useRegisterMutation, useLoginMutation } = apiSlice;

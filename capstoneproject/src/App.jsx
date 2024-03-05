@@ -7,9 +7,8 @@ import "./App.css";
 //components
 import Home from "./components/Home";
 import Register from "./components/Register";
-import Register from "./components/Register";
 import Login from "./components/Login";
-import Nav from "./components/Navbar";
+import Nav from "./components/Nav";
 
 function App() {
   const [token, setToken] = useState(null);
