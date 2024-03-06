@@ -3,11 +3,17 @@ import { useNavigate } from "react-router-dom";
 //api
 import { useLoginMutation } from "../redux/api";
 
+
+
 function Login(props) {
   const [userInfo, setUserInfo] = useState({
     username: "",
     password: "",
   });
+
+console.log(`props = ${props}`)
+console.log(`userInfo = ${userInfo}`)
+
   const [errorMsg, setError] = useState(null);
   const [login] = useLoginMutation();
   const navigate = useNavigate();
@@ -16,11 +22,15 @@ function Login(props) {
     event.preventDefault();
     const { data, error } = await login(userInfo);
 
+    console.log(`data = ${data}`)
+    console.log(`error = ${error}`)
+
+
     if (error) {
-     
       setError(error.data);
     } else {
     
+      // eslint-disable-next-line react/prop-types
       props.setToken(data.token);
         navigate("/account");
     }
@@ -50,6 +60,7 @@ function Login(props) {
             onChange={onUserInput}
           />
         </label>
+        <br />
         <label htmlFor="password">Password</label>
         <input
           type="password"
@@ -58,6 +69,7 @@ function Login(props) {
           value={userInfo.password}
           onChange={onUserInput}
         />
+        <br/>
         <button>Submit</button>
       </form>
     </div>

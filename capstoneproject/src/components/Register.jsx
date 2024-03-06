@@ -24,6 +24,7 @@ function Register(props) {
       console.log(`error ${JSON.stringify(error.data.message)}`);
     } else {
       //data.token --> has token value
+      // eslint-disable-next-line react/prop-types
       props.setToken(data.token);
       console.log(`data ${JSON.stringify(data.token)}`);
     }

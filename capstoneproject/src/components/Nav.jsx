@@ -4,10 +4,12 @@ function Nav(props) {
   const navigate = useNavigate();
 
   const logoutUser = () => {
+    // eslint-disable-next-line react/prop-types
     props.setToken(null);
     navigate("/");
   };
 
+  // eslint-disable-next-line react/prop-types
   if (props.token) {
     return (
       <nav>
