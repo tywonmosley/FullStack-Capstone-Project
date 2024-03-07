@@ -1,4 +1,4 @@
-
+import tabImage from "../assets/HomeImage.jpeg";
 
 function Account(props) {
     /**
@@ -17,7 +17,7 @@ function Account(props) {
   
     return (
       <section>
-        <h1>Account</h1>
+        <h2>Account</h2>
       </section>
     );
   }

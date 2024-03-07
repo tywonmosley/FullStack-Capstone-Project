@@ -13,16 +13,21 @@ function Nav(props) {
   if (props.token) {
     return (
       <nav>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/">Home</NavLink>|      |
+        <NavLink to="/account">Account</NavLink>|      |
          <a onClick={logoutUser}>Logout</a>
       </nav>
     );
   }
   return (
     <nav>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/register">Register</NavLink>
-      <NavLink to="/login">Login</NavLink>
+      <NavLink to="/">Home</NavLink>|      |
+
+      <NavLink to="/register">Register</NavLink>|      |
+
+      <NavLink to="/login">Login</NavLink>|      |
+
+      <NavLink to="/contact">Contact</NavLink>
     </nav>
   );
 }

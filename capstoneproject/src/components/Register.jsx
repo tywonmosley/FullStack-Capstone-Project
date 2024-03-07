@@ -40,7 +40,7 @@ function Register(props) {
 
   return (
     <div>
-      <h1>Register</h1>
+      <h2>Register</h2>
       {/* error message */}
       {errorMsg ? <p>{errorMsg}</p> : <span />}
       <form className="register" onSubmit={eventHandler}>
