@@ -8,11 +8,9 @@ import { useLoginMutation } from "../redux/api";
 function Login(props) {
   const [userInfo, setUserInfo] = useState({
     username: "",
-    password: "",
+    password: ""
   });
 
-console.log(`props = ${props}`)
-console.log(`userInfo = ${userInfo}`)
 
   const [errorMsg, setError] = useState(null);
   const [login] = useLoginMutation();
@@ -22,14 +20,11 @@ console.log(`userInfo = ${userInfo}`)
     event.preventDefault();
     const { data, error } = await login(userInfo);
 
-    console.log(`data = ${data}`)
-    console.log(`error = ${error}`)
-
-
     if (error) {
       setError(error.data);
     } else {
     
+     
       // eslint-disable-next-line react/prop-types
       props.setToken(data.token);
         navigate("/account");
