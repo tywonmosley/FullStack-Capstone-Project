@@ -18,6 +18,7 @@ function Account(props) {
     return (
       <section>
         <h2>Account</h2>
+        <img src={tabImage} alt="image"></img>
       </section>
     );
   }
