@@ -15,7 +15,6 @@ import Contact from "./components/Contact";
 function App() {
   const [token, setToken] = useState(null);
 
-  console.log("token", token);
   return (
     <div>
       <BrowserRouter>
