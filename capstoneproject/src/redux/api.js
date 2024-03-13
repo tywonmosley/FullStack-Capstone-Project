@@ -31,6 +31,14 @@ export const apiSlice = createApi({
         },
       }),
     }),
+    items: builder.query({
+      query:(token) => ({
+        url:"/products",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+    }) 
   }),
 });
 
@@ -38,4 +46,5 @@ export const {
   useRegisterMutation,
   useLoginMutation,
   useAccountQuery,
+  useItemsQuery,
 } = apiSlice;
