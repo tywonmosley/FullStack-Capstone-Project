@@ -1,11 +1,11 @@
 //api
-
 import { useItemsQuery } from "../redux/api"
 
+// eslint-disable-next-line react/prop-types
 function ItemList({ token }) {
     console.log(token)
-    const {data, error, isLooading} = useItemsQuery(token)
-if (isLooading) {
+    const {data, error, isLoading} = useItemsQuery(token)
+if (isLoading) {
     return(<p>Loading...</p>)
 } if(error) {
     return(<p>Something went wrong!</p>)
@@ -35,7 +35,7 @@ return (
        
         <img src={item.image} width="150px"/> 
         <h3>{item.title}</h3>
-        <p><b>Category:</b>{item.category}    <b>Cost:</b>{item.price}
+        <p><b>Category:</b>{item.category}    <b>Cost:</b> ${item.price}
         </p>
 
             </div>)

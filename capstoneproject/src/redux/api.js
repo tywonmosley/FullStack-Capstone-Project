@@ -38,7 +38,17 @@ export const apiSlice = createApi({
           authorization: `Bearer ${token}`,
         },
       })
-    }) 
+    }), 
+    details: builder.query({
+      query:(token) => ({
+        // eslint-disable-next-line no-undef
+        url:`"/products/${id}"`,
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+  
+    })
   }),
 });
 
@@ -47,4 +57,5 @@ export const {
   useLoginMutation,
   useAccountQuery,
   useItemsQuery,
+  useDetailsQuery,
 } = apiSlice;
