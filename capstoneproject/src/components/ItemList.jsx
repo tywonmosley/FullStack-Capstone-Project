@@ -1,16 +1,18 @@
+import { Link } from "react-router-dom"
+
 //api
 import { useItemsQuery } from "../redux/api"
 
 // eslint-disable-next-line react/prop-types
 function ItemList({ token }) {
-    console.log(token)
+  
     const {data, error, isLoading} = useItemsQuery(token)
 if (isLoading) {
     return(<p>Loading...</p>)
 } if(error) {
     return(<p>Something went wrong!</p>)
 }
-console.log(data)
+
 // console.log(JSON.stringify(data, null, 3))
 if (!data) {
     return <p>No data available</p>;
@@ -27,6 +29,8 @@ if (!data) {
          "rate": 3.9,
          "count": 120
  */
+
+
 return (
     <div>
         <h2>Item List</h2>
@@ -37,6 +41,7 @@ return (
         <h3>{item.title}</h3>
         <p><b>Category:</b>{item.category}    <b>Cost:</b> ${item.price}
         </p>
+      <Link to={`/details/${item.id}`}>See More Details</Link>
 
             </div>)
         })}

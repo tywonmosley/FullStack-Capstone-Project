@@ -12,7 +12,7 @@ import Nav from "./components/Nav";
 import Account from "./components/Account";
 import Contact from "./components/Contact";
 import ItemList from "./components/ItemList";
-import ItemsDetail from "./components/itemsDetail";
+import ItemDetails from "./components/ItemDetails";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -28,7 +28,7 @@ function App() {
         <Route path="/account" element={<Account token={token}/>} />
         <Route path="/items" element={<ItemList token={token}/>} />
         <Route path="/contact" element={<Contact />}/>
-        <Route path="/details/:id" element={<ItemsDetail token={token} />}/>
+        <Route path="/details/:id" element={<ItemDetails token={token} />}/>
         </Routes>
         </BrowserRouter>
     </div>

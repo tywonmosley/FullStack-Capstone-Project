@@ -40,9 +40,9 @@ export const apiSlice = createApi({
       })
     }), 
     details: builder.query({
-      query:(token) => ({
+    query:({token, id}) => ({
         // eslint-disable-next-line no-undef
-        url:`"/products/${id}"`,
+        url:`/products/${id}`,
         headers: {
           authorization: `Bearer ${token}`,
         },
