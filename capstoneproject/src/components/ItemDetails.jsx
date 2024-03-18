@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 //api
 import { useDetailsQuery } from "../redux/api";
 
@@ -6,6 +7,7 @@ import { useDetailsQuery } from "../redux/api";
 function ItemDetails({ token }) {
   const { id } = useParams();
   const { data, error, isLoading } = useDetailsQuery( { token, id } );
+  
 
   console.log(id)
   
@@ -27,6 +29,7 @@ function ItemDetails({ token }) {
       <br/>    
       <b>Cost:</b> ${data.price}</p>
       <p><b>Description:</b>{data.description}</p> 
+      <nav><NavLink to="/items"> Return </NavLink></nav>
       </div>: 
       <p>No data available</p> }
     </div>

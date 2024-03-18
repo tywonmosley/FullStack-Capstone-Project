@@ -16,6 +16,7 @@ function Nav(props) {
         <NavLink to="/">Home</NavLink>| |
         <NavLink to="/contact">Contact</NavLink>| |
         <NavLink to="/items">Items</NavLink>| |
+        <NavLink to="/additem">Add an Item</NavLink>| |
         <NavLink to="/account">Account</NavLink>| |
         <a onClick={logoutUser}>Logout</a>
       </nav>
