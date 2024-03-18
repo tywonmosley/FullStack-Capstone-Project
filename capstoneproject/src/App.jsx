@@ -14,6 +14,7 @@ import Contact from "./components/Contact";
 import ItemList from "./components/ItemList";
 import ItemDetails from "./components/ItemDetails";
 import AddItems from "./components/AddItems";
+import EditItems from "./components/EditItems";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -31,6 +32,7 @@ function App() {
         <Route path="/contact" element={<Contact />}/>
         <Route path="/details/:id" element={<ItemDetails token={token} />}/>
         <Route path="/additem" element={<AddItems token={token} />}/>
+        <Route path="/edit/:id" element={<EditItems token={token} />}/>
         </Routes>
         </BrowserRouter>
     </div>

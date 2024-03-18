@@ -13,13 +13,29 @@ function AddItems(props) {
         category: "",
     });
 
+    // eslint-disable-next-line no-unused-vars
     const [error, setError] = useState(null);
     const [ addItem ] = useAddItemMutation();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        // eslint-disable-next-line no-unused-vars, react/prop-types
         const { data, error } = await addItem({ token: props.token, body: form });
+       
+        if (error) {
+            setError("Something went wrong! Please try again.");
+          } else {
+            setForm({
+                title: "",
+                price: "",
+                description: "",
+                image: "",
+                category: "",
+            });
+          }
+        
     };
+    
 
     const handleChange = ({target}) =>{
         setError(null);

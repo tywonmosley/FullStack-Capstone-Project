@@ -7,7 +7,7 @@ export const apiSlice = createApi({
   reducerPath: "api",
   // All of our requests will have URLs starting with '/fakeApi'
   baseQuery: fetchBaseQuery({ baseUrl: "https://fakestoreapi.com" }),
-  
+
 tagTypes: [ "Products" ],
   endpoints: (builder) => ({
     register: builder.mutation({
@@ -62,6 +62,17 @@ tagTypes: [ "Products" ],
       }),
       invalidatesTags: ["Products"],
     }),
+   editItem: builder.mutation({
+    query: ({ token, id, body }) => ({
+      url: `/products/${id}`,
+      method:"PUT",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    body, 
+    }),
+    invalidatesTags: ["Products"],
+   }), 
   }),
 });
 
@@ -71,5 +82,6 @@ export const {
   useAccountQuery,
   useItemsQuery,
   useDetailsQuery,
-  useAddItemMutation
+  useAddItemMutation,
+  useEditItemMutation
 } = apiSlice;

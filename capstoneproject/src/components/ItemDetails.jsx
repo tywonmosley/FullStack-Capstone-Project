@@ -1,5 +1,6 @@
-import { useParams } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+
+
 //api
 import { useDetailsQuery } from "../redux/api";
 
@@ -7,9 +8,15 @@ import { useDetailsQuery } from "../redux/api";
 function ItemDetails({ token }) {
   const { id } = useParams();
   const { data, error, isLoading } = useDetailsQuery( { token, id } );
-  
+const navigate = useNavigate();
 
-  console.log(id)
+  const returnHome = () => {
+    navigate ("/items")
+  }
+
+  const editItemsDetail = () => {
+    navigate (`/edit/${id}`)
+  }
   
   if (isLoading) {
     return <p>Loading...</p>;
@@ -29,7 +36,9 @@ function ItemDetails({ token }) {
       <br/>    
       <b>Cost:</b> ${data.price}</p>
       <p><b>Description:</b>{data.description}</p> 
-      <nav><NavLink to="/items"> Return </NavLink></nav>
+      <button onClick={editItemsDetail}>Edit </button>
+      <button onClick={returnHome}>Return </button>
+
       </div>: 
       <p>No data available</p> }
     </div>
