@@ -8,7 +8,7 @@ export const apiSlice = createApi({
   // All of our requests will have URLs starting with '/fakeApi'
   baseQuery: fetchBaseQuery({ baseUrl: "https://fakestoreapi.com" }),
 
-tagTypes: [ "Products" ],
+  tagTypes: ["Products"],
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (registerUser) => ({
@@ -39,7 +39,7 @@ tagTypes: [ "Products" ],
           authorization: `Bearer ${token}`,
         },
       }),
-      providesTags: [ "Products" ],
+      providesTags: ["Products"],
     }),
     details: builder.query({
       query: ({ token, id }) => ({
@@ -49,12 +49,12 @@ tagTypes: [ "Products" ],
           authorization: `Bearer ${token}`,
         },
       }),
-      providesTags: [ "Products" ],
+      providesTags: ["Products"],
     }),
     addItem: builder.mutation({
       query: ({ token, body }) => ({
-        url: '/products',
-        method:"POST",
+        url: "/products",
+        method: "POST",
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -62,17 +62,20 @@ tagTypes: [ "Products" ],
       }),
       invalidatesTags: ["Products"],
     }),
-   editItem: builder.mutation({
-    query: ({ token, id, body }) => ({
-      url: `/products/${id}`,
-      method:"PUT",
-      headers: {
-        authorization: `Bearer ${token}`,
-      },
-    body, 
+    editItem: builder.mutation({
+      query: ({ token, id, body }) => ({
+        url: `/products/${id}`,
+        method: "PUT",
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+        body,
+      }),
+      invalidatesTags: ["Products"],
     }),
-    invalidatesTags: ["Products"],
-   }), 
+    deleteItem: builder.mutation({
+      
+    }),
   }),
 });
 
@@ -83,5 +86,5 @@ export const {
   useItemsQuery,
   useDetailsQuery,
   useAddItemMutation,
-  useEditItemMutation
+  useEditItemMutation,
 } = apiSlice;

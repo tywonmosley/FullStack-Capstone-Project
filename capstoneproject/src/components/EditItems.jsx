@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useState} from "react";
+import { useState, useEffect } from "react";
 
 //api
 import { useEditItemMutation, useDetailsQuery } from "../redux/api";
@@ -20,12 +20,20 @@ function EditItems({token}) {
   const [errorMsg, setError] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const { data, error, isLoading } = useDetailsQuery({ token, id });
+ 
+  useEffect(() => {
+    if (data) {
+      setForm(data);
+    }
+  }, [data]);
 
-  
   const cancelEdit = () => {
     navigate(`/details/${id}`);
   };
 
+  const deleteItem = () => {
+    console.log("this button works");
+  };
   const handleChange = ({ target }) => {
     setError(null);
     setForm({ ...form, [target.name]: target.value });
@@ -102,6 +110,7 @@ function EditItems({token}) {
         <br /> <br />
         <button onClick={handleSubmit}>Submit</button>
         <button onClick={cancelEdit}>Cancel</button>
+        <button onClick={deleteItem}>Delete</button>
       </form>
     </div>
   );
