@@ -1,52 +1,89 @@
-import { Link } from "react-router-dom"
-
-//api
-import { useItemsQuery } from "../redux/api"
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useItemsQuery } from "../redux/api";
 
 // eslint-disable-next-line react/prop-types
 function ItemList({ token }) {
-  
-    const {data, error, isLoading} = useItemsQuery(token)
-if (isLoading) {
-    return(<p>Loading...</p>)
-} if(error) {
-    return(<p>Something went wrong!</p>)
-}
+  const { data, error, isLoading } = useItemsQuery(token);
+  const [filterCategory, setFilterCategory] = useState("");
+  const [sortBy, setSortBy] = useState("price"); // Default sorting by price
+  const [searchQuery, setSearchQuery] = useState("");
 
-// console.log(JSON.stringify(data, null, 3))
-if (!data) {
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+  if (error) {
+    return <p>Something went wrong!</p>;
+  }
+
+  if (!data || data.length === 0) {
     return <p>No data available</p>;
-}
-/**
- * 
- *   "id": 1,
-      "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-      "price": 109.95,
-      "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-      "category": "men's clothing",
-      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
-      "rating": {
-         "rate": 3.9,
-         "count": 120
- */
+  }
 
+  // Filtering function
+  const filteredData = data.filter(
+    (item) =>
+      item.category.toLowerCase().includes(filterCategory.toLowerCase()) &&
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
-return (
+  // Sorting function
+  const sortedData = [...filteredData].sort((a, b) => {
+    if (sortBy === "price") {
+      return a.price - b.price;
+    } else if (sortBy === "rating") {
+      return b.rating.rate - a.rating.rate; // Sort by descending rating
+    }
+    return 0;
+  });
+
+  return (
     <div>
-        <h2>Item List</h2>
-        {data?.map((item) => {
-            return (<div key={item.id}> 
-       
-        <img src={item.image} width="150px"/> 
-        <h3>{item.title}</h3>
-        <p><b>Category:</b>{item.category}    <b>Cost:</b> ${item.price}
-        </p>
-      <Link to={`/details/${item.id}`}>See More Details</Link>
+      <h2>Item List</h2>
+      <div>
+        {/* Filter */}
+        <select
+          value={filterCategory}
+          onChange={(e) => setFilterCategory(e.target.value)}
+        >
+          <option value="">All Categories</option>
+          {/* Dynamically generate options based on available categories */}
+          {[...new Set(data.map((item) => item.category))].map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
 
-            </div>)
-        })}
-  </div>
-);
+        {/* Sort */}
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <option value="price">Sort by Price</option>
+          <option value="rating">Sort by Rating</option>
+        </select>
+
+        {/* Search */}
+        <input
+          type="text"
+          placeholder="Search by title"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+      </div>
+      <br/>
+
+      {sortedData.map((item) => (
+        <div key={item.id}>
+          <img src={item.image} width="150px" alt={item.title} />
+          <h3>{item.title}</h3>
+          <p>
+            <b>Category:</b> {item.category} <b>Cost:</b> ${item.price}
+          </p>
+          <Link to={`/details/${item.id}`}>See More Details</Link>
+          <br/><br/>
+        </div>
+      ))}
+    </div>
+  );
 }
 
-export default ItemList
+export default ItemList;

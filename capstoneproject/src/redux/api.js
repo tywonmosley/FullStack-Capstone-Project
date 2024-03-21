@@ -74,7 +74,14 @@ export const apiSlice = createApi({
       invalidatesTags: ["Products"],
     }),
     deleteItem: builder.mutation({
-      
+      query: ({id,token}) => ({
+        url:`/products/${id}`,
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${token}`, 
+        }
+      }),
+      invalidatesTags: ["Products"],
     }),
   }),
 });
@@ -87,4 +94,5 @@ export const {
   useDetailsQuery,
   useAddItemMutation,
   useEditItemMutation,
+  useDeleteItemMutation
 } = apiSlice;

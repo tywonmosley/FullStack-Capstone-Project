@@ -27,7 +27,7 @@ function Login(props) {
      
       // eslint-disable-next-line react/prop-types
       props.setToken(data.token);
-        navigate("/account");
+        navigate("/items");
     }
   };
 

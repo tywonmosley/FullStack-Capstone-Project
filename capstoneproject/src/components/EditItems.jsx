@@ -2,12 +2,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 //api
-import { useEditItemMutation, useDetailsQuery } from "../redux/api";
+import { useEditItemMutation, useDetailsQuery, useDeleteItemMutation } from "../redux/api";
 
 // eslint-disable-next-line react/prop-types
 function EditItems({token}) {
   let { id } = useParams();
-  const navigate = useNavigate();  
+  const navigate = useNavigate(); 
+  const [deleteItem] = useDeleteItemMutation(); 
   const [editItem] = useEditItemMutation(); 
   const [form, setForm] = useState({
     title: "",
@@ -31,9 +32,11 @@ function EditItems({token}) {
     navigate(`/details/${id}`);
   };
 
-  const deleteItem = () => {
-    console.log("this button works");
+  const removeItem = async () => {
+    await deleteItem({ id, token });
+    navigate('/itemlist');
   };
+
   const handleChange = ({ target }) => {
     setError(null);
     setForm({ ...form, [target.name]: target.value });
@@ -62,6 +65,8 @@ function EditItems({token}) {
   if (error) {
     return <p>Something went wrong!!!</p>;
   }
+
+
 
   return (
     <div>
@@ -110,7 +115,7 @@ function EditItems({token}) {
         <br /> <br />
         <button onClick={handleSubmit}>Submit</button>
         <button onClick={cancelEdit}>Cancel</button>
-        <button onClick={deleteItem}>Delete</button>
+        <button onClick={removeItem}>Delete</button>
       </form>
     </div>
   );

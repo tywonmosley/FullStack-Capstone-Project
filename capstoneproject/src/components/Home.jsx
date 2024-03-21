@@ -1,12 +1,14 @@
-//asset items
 import tabImage from "../assets/HomeImage.jpeg";
 
-
+/**
+ * Home component displays home page content.
+ * @returns {JSX.Element} Home component UI.
+ */
 function Home() {
   return (
     <div>
       <h1 className="header">Sales, Sales, Sales and More Sales!!</h1>
-      <img src={tabImage} alt="image"></img>
+      <img src={tabImage} alt="image" />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dui enim,
         molestie at mauris sit amet, aliquet egestas elit. Nam sapien massa,

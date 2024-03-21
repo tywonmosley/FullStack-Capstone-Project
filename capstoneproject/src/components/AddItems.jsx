@@ -1,9 +1,15 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
-
-//api
 import { useAddItemMutation } from "../redux/api";
 
+/**
+ * AddItems component allows users to add new items.
+ * @param {Object} props - Component props.
+ * @param {string} props.token - User authentication token.
+ * @returns {JSX.Element} AddItems component UI.
+ */
 function AddItems(props) {
+  // State for form input values
   const [form, setForm] = useState({
     title: "",
     price: "",
@@ -12,28 +18,39 @@ function AddItems(props) {
     category: "",
   });
 
- 
+  // State for handling errors
   const [error, setError] = useState(null);
+
+  // Mutation hook for adding an item
   const [addItem] = useAddItemMutation();
 
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // eslint-disable-next-line no-unused-vars, react/prop-types
-    const { data, error } = await addItem({ token: props.token, body: form });
+    try {
+      // Add item with API mutation
+      // eslint-disable-next-line no-unused-vars
+      const { data, error } = await addItem({ token: props.token, body: form });
 
-    if (error) {
-      setError("Something went wrong! Please try again.");
-    } else {
-      setForm({
-        title: "",
-        price: "",
-        description: "",
-        image: "",
-        category: "",
-      });
+      // Handle errors
+      if (error) {
+        setError("Something went wrong! Please try again.");
+      } else {
+        // Clear form on successful submission
+        setForm({
+          title: "",
+          price: "",
+          description: "",
+          image: "",
+          category: "",
+        });
+      }
+    } catch (error) {
+      console.error("Error occurred while adding item:", error);
     }
   };
 
+  // Handle form input changes
   const handleChange = ({ target }) => {
     setError(null);
     setForm({ ...form, [target.name]: target.value });
@@ -43,7 +60,7 @@ function AddItems(props) {
     <div>
       <h2>Add an Item</h2>
       {error && <p>{error}</p>}
-      <form>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="title">Title:</label>
         <input
           value={form.title}
@@ -84,7 +101,7 @@ function AddItems(props) {
           onChange={handleChange}
         />
         <br /> <br />
-        <button onClick={handleSubmit}>Submit</button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );

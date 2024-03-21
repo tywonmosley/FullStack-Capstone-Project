@@ -25,6 +25,7 @@ function Nav(props) {
   return (
     <nav>
       <NavLink to="/">Home</NavLink>| |
+      <NavLink to="/items">Items</NavLink>| |
       <NavLink to="/register">Register</NavLink>| |
       <NavLink to="/login">Login</NavLink>| |
       <NavLink to="/contact">Contact</NavLink>
