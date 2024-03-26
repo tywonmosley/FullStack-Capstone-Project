@@ -15,6 +15,7 @@ import ItemList from "./components/ItemList";
 import ItemDetails from "./components/ItemDetails";
 import AddItems from "./components/AddItems";
 import EditItems from "./components/EditItems";
+import Cart from "./components/Cart";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -27,14 +28,15 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Register setToken={setToken} />} />
           <Route path="/login" element={<Login setToken={setToken} />} />
-        <Route path="/account" element={<Account token={token}/>} />
-        <Route path="/items" element={<ItemList token={token}/>} />
-        <Route path="/contact" element={<Contact />}/>
-        <Route path="/details/:id" element={<ItemDetails token={token} />}/>
-        <Route path="/additem" element={<AddItems token={token} />}/>
-        <Route path="/edit/:id" element={<EditItems token={token} />}/>
+          <Route path="/account" element={<Account token={token} />} />
+          <Route path="/items" element={<ItemList token={token} />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/details/:id" element={<ItemDetails token={token} />} />
+          <Route path="/additem" element={<AddItems token={token} />} />
+          <Route path="/edit/:id" element={<EditItems token={token} />} />
+          <Route path="/carts" element={<Cart token={token} /> }/>
         </Routes>
-        </BrowserRouter>
+      </BrowserRouter>
     </div>
   );
 }

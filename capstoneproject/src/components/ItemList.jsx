@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useItemsQuery } from "../redux/api";
 
+
 // eslint-disable-next-line react/prop-types
 function ItemList({ token }) {
   const { data, error, isLoading } = useItemsQuery(token);
@@ -38,7 +39,7 @@ function ItemList({ token }) {
   });
 
   return (
-    <div>
+    <div className="shop">
       <h2>Item List</h2>
       <div>
         {/* Filter */}
@@ -72,13 +73,15 @@ function ItemList({ token }) {
       <br/>
 
       {sortedData.map((item) => (
-        <div key={item.id}>
+        <div className="product" key={item.id}>
           <img src={item.image} width="150px" alt={item.title} />
           <h3>{item.title}</h3>
           <p>
             <b>Category:</b> {item.category} <b>Cost:</b> ${item.price}
           </p>
           <Link to={`/details/${item.id}`}>See More Details</Link>
+          <br></br>
+          <button>Add to Cart</button>
           <br/><br/>
         </div>
       ))}

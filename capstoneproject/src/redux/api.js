@@ -8,7 +8,7 @@ export const apiSlice = createApi({
   // All of our requests will have URLs starting with '/fakeApi'
   baseQuery: fetchBaseQuery({ baseUrl: "https://fakestoreapi.com" }),
 
-  tagTypes: ["Products"],
+  tagTypes: ["Products", "Carts"],
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (registerUser) => ({
